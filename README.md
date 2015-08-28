@@ -44,7 +44,7 @@ Crops and resizes the image to fit the provided sizes and the aspect ratio given
 ```
   
   image.resizeAndcrop({width: 500, height: 500, method: 'cover'});
-``
+```
 
 ### Execute all commands and return the Buffer with the modified image.
 
