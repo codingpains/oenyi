@@ -58,3 +58,22 @@ Crops and resizes the image to fit the provided sizes and the aspect ratio given
 	  // Your code here.
 	});
 ```
+
+### Run a complex chained transformation.
+
+Use method chaining to apply many transformations to a single image. Get the image stream at the end and do with it whatever you want.
+
+```
+  var oenyim = require('oenyim');
+  var wstream = require('fs).createWriteStream('/path/to/destination');
+  
+  oenyim('/path/to/image')
+    .toJPG()
+    .compress(80)
+    .resizeAndCrop(500,500)
+    .exec(function(err, image) {
+  	  if (err) return console.error(err);
+  	  
+  	  image.pipe(wstream);  
+    });
+```
