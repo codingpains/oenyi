@@ -34,10 +34,7 @@ It is built to chain all transformations you need and execute them once you call
 Keeps aspect ratio and just scales up or down the image until it fits the provided sizes.
 
 ```
-  var width = 500;
-  var height = 255;
-  
-  image.resizeToFit(width, height);
+  image.resize({width: 500, height: 255, method: 'contain'});
 ```
 
 ### Resize and crop image to match size and aspect ratio.
@@ -45,11 +42,9 @@ Keeps aspect ratio and just scales up or down the image until it fits the provid
 Crops and resizes the image to fit the provided sizes and the aspect ratio given by such sizes.
 
 ```
-  var width = 500;
-  var height = 255;
   
-  image.resizeAndcrop(width, height);
-```
+  image.resizeAndcrop({width: 500, height: 500, method: 'cover'});
+``
 
 ### Execute all commands and return the Buffer with the modified image.
 
@@ -82,6 +77,6 @@ Use method chaining to apply many transformations to a single image. Get the ima
     .exec(function(err, image) {
   	  if (err) return console.error(err);
   	  
-  	  fs.writeFile('/path/to/destiny')
+  	  fs.writeFile('/path/to/destiny', image)
     });
 ```
