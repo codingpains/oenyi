@@ -51,12 +51,20 @@ Crops and resizes the image to fit the provided sizes and the aspect ratio given
   image.resizeAndcrop(width, height);
 ```
 
-### Execute all commands and return the Stream with the modified image.
+### Execute all commands and return the Buffer with the modified image.
 
 ```
-	image.exec(function(err, stream) {
+	image.exec(function(err, imagebuf) {
 	  // Your code here.
 	});
+```
+
+### Execute all commands and pipe to a WritableStream;
+
+```
+  var wstream = require('fs').createWriteStream('/path/to/destiny');
+  
+  image.pipe(wstream);
 ```
 
 ### Run a complex chained transformation.
@@ -65,7 +73,7 @@ Use method chaining to apply many transformations to a single image. Get the ima
 
 ```
   var oenyim = require('oenyim');
-  var wstream = require('fs).createWriteStream('/path/to/destination');
+  var fs = require('fs);
   
   oenyim('/path/to/image')
     .toJPG()
@@ -74,6 +82,6 @@ Use method chaining to apply many transformations to a single image. Get the ima
     .exec(function(err, image) {
   	  if (err) return console.error(err);
   	  
-  	  image.pipe(wstream);  
+  	  fs.writeFile('/path/to/destiny')
     });
 ```
