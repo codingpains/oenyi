@@ -37,13 +37,13 @@ Keeps aspect ratio and just scales up or down the image until it fits the provid
   image.resize({width: 500, height: 255, method: 'contain'});
 ```
 
-### Resize and crop image to match size and aspect ratio.
+### Resize image to cover or match size and force aspect ratio with no distortion.
 
 Crops and resizes the image to fit the provided sizes and the aspect ratio given by such sizes.
 
 ```
   
-  image.resizeAndcrop({width: 500, height: 500, method: 'cover'});
+  image.resize({width: 500, height: 500, method: 'cover'});
 ```
 
 ### Execute all commands and return the Buffer with the modified image.
