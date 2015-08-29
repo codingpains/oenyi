@@ -1,0 +1,34 @@
+{
+  "name": "oenyim",
+  "description": "A wrapper for gm and other image processing commands that provides a chainable API with async pipeline of commands.",
+  "version": "0.0.1",
+  "keywords": [
+    "image",
+    "images",
+    "processing",
+    "resize",
+    "cover",
+    "contain",
+    "compress"
+  ],
+  "homepage": "https://github.com/codingpains/oenyim",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/codingpains/oenyim.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Gustavo Ortiz",
+    "email": "gustavo.ortiz.monroy@gmail.com",
+    "url": "http://medium.com/@codingpains"
+  },
+  "main": "./index.js",
+  "files": [
+    "lib/oenyim",
+  ],
+  "dependencies": {
+    "async": "^1.4.2",
+    "bluebird": "^2.9.34",
+    "gm": "^1.18.1"
+  }
+}
