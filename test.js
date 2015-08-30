@@ -1,6 +1,17 @@
 var test = require('tape');
 var oenyim = require('./index');
 
+test('should return oenyim instance', function(assert) {
+  assert.plan(1);
+  assert.timeoutAfter(5);
+
+  var image = oenyim('');
+  var actual = image.constructor.name;
+  var expected = 'Oenyim';
+
+  assert.equal(actual, expected);
+});
+
 test('should chain', function(assert) {
   assert.plan(1);
   assert.timeoutAfter(30);
@@ -16,8 +27,8 @@ test('should chain', function(assert) {
   assert.equal(actual, expected);
 });
 
-test('should execute queue in order and empty queue.', function(assert) {
-  assert.plan(2);
+test('should execute queue in order', function(assert) {
+  assert.plan(1);
   assert.timeoutAfter(150);
 
   var image = oenyim('');
@@ -40,11 +51,25 @@ test('should execute queue in order and empty queue.', function(assert) {
     var actual = data;
 
     assert.equal(actual, expected, 'execution order');
+  });
+});
 
-    expected = 0;
-    actual = image._queue.length;
+test('should empty queue after execution', function(assert) {
+  assert.plan(1);
+  assert.timeoutAfter(150);
+
+  var image = oenyim('');
+
+  function f1(fn) {
+    fn(null, {toBuffer: function(mime, cb) { return cb(null,1); }});
+  };
+
+  image._queue = [f1];
+
+  image.exec(function(err, data) {
+    var expected = 0;
+    var actual = image._queue.length;
 
     assert.equal(actual, expected, 'empty queue after execution');
   });
-
-});
+})
