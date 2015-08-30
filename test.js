@@ -1,11 +1,19 @@
 var oenyim = require('./index');
 var fs = require('fs');
+var wstream = fs.createWriteStream('/Users/voxfeed_1/Desktop/gusortiz-cover-stream.jpg');
 
 oenyim('/Users/voxfeed_1/Desktop/gusortiz.jpeg')
   .resize({width : 1000, height: 400, method: 'cover'})
   .exec(function(err, buff) {
     console.log('Err, res', err, buff);
     fs.writeFile('/Users/voxfeed_1/Desktop/gusortiz-cover.jpg', buff);
+  });
+
+oenyim('/Users/voxfeed_1/Desktop/gusortiz.jpeg')
+  .resize({width : 3000, height: 1200, method: 'cover'})
+  .pipe(wstream)
+  .then(function(stream) {
+    stream.on('finish', function() {console.log('Finished')});
   });
 
 oenyim('/Users/voxfeed_1/Desktop/gusortiz.jpeg')
