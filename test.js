@@ -1,24 +1,15 @@
+var test = require('tape');
 var oenyim = require('./index');
-var fs = require('fs');
-var wstream = fs.createWriteStream('/Users/voxfeed_1/Desktop/gusortiz-cover-stream.jpg');
 
-oenyim('/Users/voxfeed_1/Desktop/gusortiz.jpeg')
-  .resize({width : 1000, height: 400, method: 'cover'})
-  .exec(function(err, buff) {
-    console.log('Err, res', err, buff);
-    fs.writeFile('/Users/voxfeed_1/Desktop/gusortiz-cover.jpg', buff);
-  });
+test('should chain', function(assert) {
+  assert.plan(1);
+  var image = oenyim('');
+  var expected = 2;
+  var actual;
 
-oenyim('/Users/voxfeed_1/Desktop/gusortiz.jpeg')
-  .resize({width : 3000, height: 1200, method: 'cover'})
-  .pipe(wstream)
-  .then(function(stream) {
-    stream.on('finish', function() {console.log('Finished')});
-  });
+  image.compress().resize();
 
-oenyim('/Users/voxfeed_1/Desktop/gusortiz.jpeg')
-  .resize({width : 200, height: 1250, method: 'contain'})
-  .exec(function(err, buff) {
-    console.log('Err, res', err, buff);
-    fs.writeFile('/Users/voxfeed_1/Desktop/gusortiz-contain.jpg', buff);
-  });
+  actual = image._queue.length;
+
+  assert.equals(actual, expected);
+});

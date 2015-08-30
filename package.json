@@ -11,6 +11,9 @@
     "contain",
     "compress"
   ],
+  "scripts": {
+    "test": "tape ./test.js"
+  },
   "homepage": "https://github.com/codingpains/oenyim",
   "repository": {
     "type": "git",
@@ -24,11 +27,12 @@
   },
   "main": "./index.js",
   "files": [
-    "lib/oenyim",
+    "lib/oenyim"
   ],
   "dependencies": {
     "async": "^1.4.2",
     "bluebird": "^2.9.34",
-    "gm": "^1.18.1"
+    "gm": "^1.18.1",
+    "tape": "^4.2.0"
   }
 }
