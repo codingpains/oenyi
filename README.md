@@ -1,4 +1,5 @@
 # oenyim
+[![Build Status](https://travis-ci.org/codingpains/oenyim.svg?branch=master)](https://travis-ci.org/codingpains/oenyim)
 
 A wrapper for a few gm methods that just provides a convenient and consistent API.
 
@@ -24,7 +25,7 @@ It is built to chain all transformations you need and execute them once you call
 
 ```
   var quality = 90;
-  
+
   image.compress(quality);
 ```
 
@@ -42,7 +43,7 @@ Keeps aspect ratio and just scales up or down the image until it fits the provid
 Crops and resizes the image to fit the provided sizes and the aspect ratio given by such sizes.
 
 ```
-  
+
   image.resize({width: 500, height: 500, method: 'cover'});
 ```
 
@@ -58,7 +59,7 @@ Crops and resizes the image to fit the provided sizes and the aspect ratio given
 
 ```
   var wstream = require('fs').createWriteStream('/path/to/destiny');
-  
+
   image.pipe(wstream);
 ```
 
@@ -69,14 +70,14 @@ Use method chaining to apply many transformations to a single image. Get the ima
 ```
   var oenyim = require('oenyim');
   var fs = require('fs);
-  
+
   oenyim('/path/to/image')
     .toJPG()
     .compress(80)
     .resizeAndCrop(500,500)
     .exec(function(err, image) {
   	  if (err) return console.error(err);
-  	  
+
   	  fs.writeFile('/path/to/destiny', image)
     });
 ```
