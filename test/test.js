@@ -213,6 +213,8 @@ test('should resize with correct values in contain method landscape to smaller r
     });
 });
 
+//From square resizing
+
 test('should resize with correct values in contain method square to square', function(assert) {
   assert.plan(2);
   var resizeArgs = {width: 400, height: 400, method: 'contain'};
@@ -255,6 +257,29 @@ test('should resize with correct values in contain method square to portrait', f
     });
 });
 
+test('should resize with correct values in contain method square to landsape', function(assert) {
+  assert.plan(2);
+  var resizeArgs = {width: 400, height: 310, method: 'contain'};
+  var image = oenyim('');
+
+  image._size = {width: testImages.sq.size.width, height: testImages.sq.size.height};
+
+  image.resize(resizeArgs)
+    .exec(function(err, buffer, calc) {
+      var expected = 310;
+      var actual = calc.resize.width;
+
+      assert.equal(actual, expected, 'resized with is correct');
+
+      expected = 310;
+      actual = calc.resize.height;
+
+      assert.equal(actual, expected, 'resized height is correct');
+    });
+});
+
+// From portrait resizing
+
 test('should resize with correct values in contain method portait to square', function(assert) {
   assert.plan(2);
   var resizeArgs = {width: 400, height: 400, method: 'contain'};
@@ -270,6 +295,90 @@ test('should resize with correct values in contain method portait to square', fu
       assert.equal(actual, expected, 'resized with is correct');
 
       expected = 400;
+      actual = calc.resize.height;
+
+      assert.equal(actual, expected, 'resized height is correct');
+    });
+});
+
+test('should resize with correct values in contain method portait to portrait with smaller ratio', function(assert) {
+  assert.plan(2);
+  var resizeArgs = {width: 200, height: 800, method: 'contain'};
+  var image = oenyim('');
+
+  image._size = {width: testImages.pt.size.width, height: testImages.pt.size.height};
+
+  image.resize(resizeArgs)
+    .exec(function(err, buffer, calc) {
+      var expected = 200;
+      var actual = calc.resize.width;
+
+      assert.equal(actual, expected, 'resized with is correct');
+
+      expected = 286;
+      actual = calc.resize.height;
+
+      assert.equal(actual, expected, 'resized height is correct');
+    });
+});
+
+test('should resize with correct values in contain method portait to portrait with bigger ratio', function(assert) {
+  assert.plan(2);
+  var resizeArgs = {width: 700, height: 800, method: 'contain'};
+  var image = oenyim('');
+
+  image._size = {width: testImages.pt.size.width, height: testImages.pt.size.height};
+
+  image.resize(resizeArgs)
+    .exec(function(err, buffer, calc) {
+      var expected = 559;
+      var actual = calc.resize.width;
+
+      assert.equal(actual, expected, 'resized with is correct');
+
+      expected = 800;
+      actual = calc.resize.height;
+
+      assert.equal(actual, expected, 'resized height is correct');
+    });
+});
+
+test('should resize with correct values in contain method portait to portrait with same ratio', function(assert) {
+  assert.plan(2);
+  var resizeArgs = {width: 559, height: 800, method: 'contain'};
+  var image = oenyim('');
+
+  image._size = {width: testImages.pt.size.width, height: testImages.pt.size.height};
+
+  image.resize(resizeArgs)
+    .exec(function(err, buffer, calc) {
+      var expected = 559;
+      var actual = calc.resize.width;
+
+      assert.equal(actual, expected, 'resized with is correct');
+
+      expected = 800;
+      actual = calc.resize.height;
+
+      assert.equal(actual, expected, 'resized height is correct');
+    });
+});
+
+test('should resize with correct values in contain method portait to landscape', function(assert) {
+  assert.plan(2);
+  var resizeArgs = {width: 600, height: 380, method: 'contain'};
+  var image = oenyim('');
+
+  image._size = {width: testImages.pt.size.width, height: testImages.pt.size.height};
+
+  image.resize(resizeArgs)
+    .exec(function(err, buffer, calc) {
+      var expected = 266;
+      var actual = calc.resize.width;
+
+      assert.equal(actual, expected, 'resized with is correct');
+
+      expected = 380;
       actual = calc.resize.height;
 
       assert.equal(actual, expected, 'resized height is correct');
