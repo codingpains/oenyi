@@ -87,31 +87,9 @@ test('should empty queue after execution', function(assert) {
   });
 });
 
-test('should return Buffer and transformations object on sucessful exec', function(assert) {
-  assert.plan(3);
-  var image = oenyim(testImages.sq.filename);
-  var buff = new Buffer(1);
-
-  image
-    .resize({width: 200, height: 200, method: 'contain'})
-    .exec(function(err, buffer, tfs) {
-      assert.equals(err, null, 'exec succeded');
-
-      var expected = typeof buff;
-      var actual = typeof buffer;
-
-      assert.equal(actual, expected, 'exec callback first data argument is a buffer');
-
-      expected = 'object';
-      actual = typeof tfs;
-
-      assert.equal(actual, expected, 'exec callback second data argument is an object');
-    });
-});
-
 test('should return instance of error on failing exec', function(assert) {
   assert.plan(1);
-  var image = oenyim(testImages.sq.filename);
+  var image = oenyim('');
   var error = new Error();
 
   function fail(fn) {
@@ -130,9 +108,11 @@ test('should return instance of error on failing exec', function(assert) {
 test('should apply just resize when method is contain', function(assert) {
   assert.plan(2);
   var resizeArgs = {width: 300, height: 400, method: 'contain'};
+  var image = oenyim('');
 
-  oenyim(testImages.sq.filename)
-    .resize(resizeArgs)
+  image._size = {width: testImages.ls.size.width, height: testImages.ls.size.height};
+
+  image.resize(resizeArgs)
     .exec(function(err, buffer, calc) {
       var keyNames = Object.keys(calc);
       var expected = 1;
@@ -147,12 +127,16 @@ test('should apply just resize when method is contain', function(assert) {
     });
 });
 
+//From landscape resizing
+
 test('should resize with correct values in contain method landscape to portrait', function(assert) {
   assert.plan(2);
   var resizeArgs = {width: 300, height: 400, method: 'contain'};
+  var image = oenyim('');
 
-  oenyim(testImages.ls.filename)
-    .resize(resizeArgs)
+  image._size = {width: testImages.ls.size.width, height: testImages.ls.size.height};
+
+  image.resize(resizeArgs)
     .exec(function(err, buffer, calc) {
       var expected = 300;
       var actual = calc.resize.width;
@@ -160,6 +144,132 @@ test('should resize with correct values in contain method landscape to portrait'
       assert.equal(actual, expected, 'resized with is correct');
 
       expected = 225;
+      actual = calc.resize.height;
+
+      assert.equal(actual, expected, 'resized height is correct');
+    });
+});
+
+test('should resize with correct values in contain method landscape to square', function(assert) {
+  assert.plan(2);
+  var resizeArgs = {width: 200, height: 200, method: 'contain'};
+  var image = oenyim('');
+
+  image._size = {width: testImages.ls.size.width, height: testImages.ls.size.height};
+
+  image.resize(resizeArgs)
+    .exec(function(err, buffer, calc) {
+      var expected = 200;
+      var actual = calc.resize.width;
+
+      assert.equal(actual, expected, 'resized with is correct');
+
+      expected = 150;
+      actual = calc.resize.height;
+
+      assert.equal(actual, expected, 'resized height is correct');
+    });
+});
+
+test('should resize with correct values in contain method landscape to larger ratio landscape', function(assert) {
+  assert.plan(2);
+  var resizeArgs = {width: 400, height: 200, method: 'contain'};
+  var image = oenyim('');
+
+  image._size = {width: testImages.ls.size.width, height: testImages.ls.size.height};
+
+  image.resize(resizeArgs)
+    .exec(function(err, buffer, calc) {
+      var expected = 267;
+      var actual = calc.resize.width;
+
+      assert.equal(actual, expected, 'resized with is correct');
+
+      expected = 200;
+      actual = calc.resize.height;
+
+      assert.equal(actual, expected, 'resized height is correct');
+    });
+});
+
+test('should resize with correct values in contain method landscape to smaller ratio landscape', function(assert) {
+  assert.plan(2);
+  var resizeArgs = {width: 300, height: 270, method: 'contain'};
+  var image =  oenyim('');
+
+  image._size = {width: testImages.ls.size.width, height: testImages.ls.size.height};
+
+  image.resize(resizeArgs)
+    .exec(function(err, buffer, calc) {
+      var expected = 300;
+      var actual = calc.resize.width;
+
+      assert.equal(actual, expected, 'resized with is correct');
+
+      expected = 225;
+      actual = calc.resize.height;
+
+      assert.equal(actual, expected, 'resized height is correct');
+    });
+});
+
+test('should resize with correct values in contain method square to square', function(assert) {
+  assert.plan(2);
+  var resizeArgs = {width: 400, height: 400, method: 'contain'};
+  var image = oenyim('');
+
+  image._size = {width: testImages.sq.size.width, height: testImages.sq.size.height};
+
+  image.resize(resizeArgs)
+    .exec(function(err, buffer, calc) {
+      var expected = 400;
+      var actual = calc.resize.width;
+
+      assert.equal(actual, expected, 'resized with is correct');
+
+      expected = 400;
+      actual = calc.resize.height;
+
+      assert.equal(actual, expected, 'resized height is correct');
+    });
+});
+
+test('should resize with correct values in contain method square to portrait', function(assert) {
+  assert.plan(2);
+  var resizeArgs = {width: 200, height: 400, method: 'contain'};
+  var image = oenyim('');
+
+  image._size = {width: testImages.sq.size.width, height: testImages.sq.size.height};
+
+  image.resize(resizeArgs)
+    .exec(function(err, buffer, calc) {
+      var expected = 200;
+      var actual = calc.resize.width;
+
+      assert.equal(actual, expected, 'resized with is correct');
+
+      expected = 200;
+      actual = calc.resize.height;
+
+      assert.equal(actual, expected, 'resized height is correct');
+    });
+});
+
+test('should resize with correct values in contain method portait to square', function(assert) {
+  assert.plan(2);
+  var resizeArgs = {width: 400, height: 400, method: 'contain'};
+  var image = oenyim('');
+
+  image._size = {width: testImages.pt.size.width, height: testImages.pt.size.height};
+
+  image.resize(resizeArgs)
+    .exec(function(err, buffer, calc) {
+      var expected = 280;
+      var actual = calc.resize.width;
+
+      assert.equal(actual, expected, 'resized with is correct');
+
+      expected = 400;
       actual = calc.resize.height;
 
       assert.equal(actual, expected, 'resized height is correct');
