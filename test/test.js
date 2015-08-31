@@ -2,8 +2,21 @@ var test = require('tape');
 var fs = require('fs');
 var oenyim = require('../index');
 var path = require('path');
-var imagePath = path.join(__dirname, './assets/ssj.jpeg');
-var origSize = {width: 259, height: 194};
+var testImages = {
+  sq: {
+    filename: path.join(__dirname, './assets/ssj-sq.jpeg'),
+    size: {width: 225, height: 225}
+  },
+  ls: {
+    filename: path.join(__dirname, './assets/ssj-ls.jpeg'),
+    size: {width: 259, height: 194}
+  },
+  pt: {
+    filename: path.join(__dirname, './assets/ssj-pt.jpeg'),
+    size: {width: 188, height: 269}
+  },
+};
+
 
 test('should return oenyim instance', function(assert) {
   assert.plan(1);
@@ -76,7 +89,7 @@ test('should empty queue after execution', function(assert) {
 
 test('should return Buffer and transformations object on sucessful exec', function(assert) {
   assert.plan(3);
-  var image = oenyim(imagePath);
+  var image = oenyim(testImages.sq.filename);
   var buff = new Buffer(1);
 
   image
@@ -98,7 +111,7 @@ test('should return Buffer and transformations object on sucessful exec', functi
 
 test('should return instance of error on failing exec', function(assert) {
   assert.plan(1);
-  var image = oenyim(imagePath);
+  var image = oenyim(testImages.sq.filename);
   var error = new Error();
 
   function fail(fn) {
@@ -118,7 +131,7 @@ test('should apply just resize when method is contain', function(assert) {
   assert.plan(2);
   var resizeArgs = {width: 300, height: 400, method: 'contain'};
 
-  oenyim(imagePath)
+  oenyim(testImages.sq.filename)
     .resize(resizeArgs)
     .exec(function(err, buffer, calc) {
       var keyNames = Object.keys(calc);
@@ -134,11 +147,11 @@ test('should apply just resize when method is contain', function(assert) {
     });
 });
 
-test('should resize with correct values in contain method', function(assert) {
+test('should resize with correct values in contain method landscape to portrait', function(assert) {
   assert.plan(2);
   var resizeArgs = {width: 300, height: 400, method: 'contain'};
 
-  oenyim(imagePath)
+  oenyim(testImages.ls.filename)
     .resize(resizeArgs)
     .exec(function(err, buffer, calc) {
       var expected = 300;
