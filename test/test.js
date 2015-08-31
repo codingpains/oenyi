@@ -7,7 +7,6 @@ var origSize = {width: 259, height: 194};
 
 test('should return oenyim instance', function(assert) {
   assert.plan(1);
-  assert.timeoutAfter(25);
 
   var image = oenyim('');
   var actual = image.constructor.name;
@@ -18,7 +17,6 @@ test('should return oenyim instance', function(assert) {
 
 test('should chain', function(assert) {
   assert.plan(1);
-  assert.timeoutAfter(30);
 
   var image = oenyim('');
   var expected = 2;
@@ -33,7 +31,6 @@ test('should chain', function(assert) {
 
 test('should execute queue in order', function(assert) {
   assert.plan(1);
-  assert.timeoutAfter(150);
 
   var image = oenyim('');
 
@@ -60,7 +57,6 @@ test('should execute queue in order', function(assert) {
 
 test('should empty queue after execution', function(assert) {
   assert.plan(1);
-  assert.timeoutAfter(150);
 
   var image = oenyim('');
 
@@ -118,8 +114,8 @@ test('should return instance of error on failing exec', function(assert) {
   });
 });
 
-test('should apply just resize with correct values when method is contain', function(assert) {
-  assert.plan(4);
+test('should apply just resize when method is contain', function(assert) {
+  assert.plan(2);
   var resizeArgs = {width: 300, height: 400, method: 'contain'};
 
   oenyim(imagePath)
@@ -135,9 +131,18 @@ test('should apply just resize with correct values when method is contain', func
       actual = keyNames[0];
 
       assert.equal(actual, expected, 'applied resize');
+    });
+});
 
-      expected = 300;
-      actual = calc.resize.width;
+test('should resize with correct values in contain method', function(assert) {
+  assert.plan(2);
+  var resizeArgs = {width: 300, height: 400, method: 'contain'};
+
+  oenyim(imagePath)
+    .resize(resizeArgs)
+    .exec(function(err, buffer, calc) {
+      var expected = 300;
+      var actual = calc.resize.width;
 
       assert.equal(actual, expected, 'resized with is correct');
 
