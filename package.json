@@ -12,7 +12,7 @@
     "compress"
   ],
   "scripts": {
-    "test": "tape ./test.js"
+    "test": "tape ./test/test.js"
   },
   "homepage": "https://github.com/codingpains/oenyim",
   "repository": {
