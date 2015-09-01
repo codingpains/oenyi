@@ -507,7 +507,6 @@ test('should resize with correct values in contain method portait to portrait wi
 });
 
 test('should resize with correct values in contain method portait to landscape', function(assert) {
-  assert.plan(2);
   var resizeArgs = {width: 600, height: 380, method: 'contain'};
   var image = oenyi('');
 
@@ -517,12 +516,27 @@ test('should resize with correct values in contain method portait to landscape',
     .exec(function(err, buffer, calc) {
       var expected = 266;
       var actual = calc.resize.width;
-
       assert.equal(actual, expected, 'resized with is correct');
 
       expected = 380;
       actual = calc.resize.height;
-
       assert.equal(actual, expected, 'resized height is correct');
+
+      assert.end();
+    });
+});
+
+// Compression
+
+test('compress: should return max quality', function(assert) {
+  var image = oenyi();
+
+  image.compress({quality: 75})
+    .exec(function(err, buffer, calc) {
+      var expected = 75;
+      var actual = calc.compress.quality;
+      assert.equal(actual, expected, 'compress quality is correct');
+
+      assert.end();
     });
 });
