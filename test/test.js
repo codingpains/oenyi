@@ -3,18 +3,9 @@ var fs = require('fs');
 var oenyi = require('../index');
 var path = require('path');
 var testImages = {
-  sq: {
-    filename: path.join(__dirname, './assets/ssj-sq.jpeg'),
-    size: {width: 225, height: 225}
-  },
-  ls: {
-    filename: path.join(__dirname, './assets/ssj-ls.jpeg'),
-    size: {width: 259, height: 194}
-  },
-  pt: {
-    filename: path.join(__dirname, './assets/ssj-pt.jpeg'),
-    size: {width: 188, height: 269}
-  },
+  sq: { size: {width: 225, height: 225} },
+  ls: { size: {width: 259, height: 194} },
+  pt: { size: {width: 188, height: 269} },
 };
 
 
@@ -393,7 +384,7 @@ test('resize by cover: should calculate correct values  square to landscape', fu
       expected = 56;
       actual = calc.crop.y;
       assert.equal(actual, expected, 'crop y is correct');
-      
+
       assert.end();
     });
 });
