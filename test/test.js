@@ -531,8 +531,10 @@ test('should resize with correct values in contain method portait to landscape',
 test('compress: should return max quality', function(assert) {
   var image = oenyi();
 
+  image._format = 'png'; // Mocking images might return gif
   image.compress({quality: 75})
     .exec(function(err, buffer, calc) {
+      console.log(err);
       var expected = 75;
       var actual = calc.compress.quality;
       assert.equal(actual, expected, 'compress quality is correct');
@@ -547,9 +549,22 @@ test('compress: should return COMPRESSION_ERROR if called on GIF', function(asse
   image._format = 'gif';
   image.compress({quality: 75})
     .exec(function(err, buffer, calc) {
-      var expected = 'COMPRESSION_ERROR';
-      var actual = err.message;
+      var expected = 'CompressionError';
+      var actual = err.name;
       assert.equal(actual, expected, 'compress format chech is correct');
+
+      assert.end();
+    });
+});
+
+test('to jpeg: should return to jpeg format', function(assert) {
+  var image = oenyi();
+
+  image.toJPG()
+    .exec(function(err, buffer, calc) {
+      var expected = 'jpg';
+      var actual = calc.convert.toFormat;
+      assert.equal(actual, expected);
 
       assert.end();
     });
