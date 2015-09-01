@@ -540,3 +540,17 @@ test('compress: should return max quality', function(assert) {
       assert.end();
     });
 });
+
+test('compress: should return COMPRESSION_ERROR if called on GIF', function(assert) {
+  var image = oenyi();
+
+  image._format = 'gif';
+  image.compress({quality: 75})
+    .exec(function(err, buffer, calc) {
+      var expected = 'COMPRESSION_ERROR';
+      var actual = err.message;
+      assert.equal(actual, expected, 'compress format chech is correct');
+
+      assert.end();
+    });
+});
