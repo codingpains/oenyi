@@ -1,5 +1,7 @@
 # Oenyi
+
 [![Build Status](https://travis-ci.org/codingpains/oenyi.svg?branch=master)](https://travis-ci.org/codingpains/oenyi)
+
 A wrapper for a few gm methods that just provides a convenient and consistent API.
 
 It is built to chain all transformations you need and execute them once you call the `exec` method, returning the modified image as a `Stream`.
