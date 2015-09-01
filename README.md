@@ -9,7 +9,7 @@ It is built to chain all transformations you need and execute them once you call
 ### Getting an oenyi image instance.
 
 
-```
+```js
   var oenyi = require('oenyi');
   var image = oenyi('/path/to/image');
 ```
@@ -17,14 +17,14 @@ It is built to chain all transformations you need and execute them once you call
 ### Convert image to jpeg.
 
 
-```
+```js
   image.toJPG();
 ```
 
 ### Compress image to a given quality.
 
 
-```
+```js
   image.compress({quality: 90});
 ```
 
@@ -33,7 +33,7 @@ It is built to chain all transformations you need and execute them once you call
 
 Keeps aspect ratio and just scales up or down the image until it fits the provided sizes.
 
-```
+```js
   image.resize({width: 500, height: 255, method: 'contain'});
 ```
 
@@ -41,14 +41,14 @@ Keeps aspect ratio and just scales up or down the image until it fits the provid
 
 Crops and resizes the image to fit the provided sizes and the aspect ratio given by such sizes.
 
-```
+```js
 
   image.resize({width: 500, height: 500, method: 'cover'});
 ```
 
 ### Execute all commands and return the Buffer with the modified image.
 
-```
+```js
 	image.exec(function(err, imageBuffer) {
 	  // Your code here.
 	});
@@ -56,7 +56,7 @@ Crops and resizes the image to fit the provided sizes and the aspect ratio given
 
 ### Execute all commands and pipe to a WritableStream;
 
-```
+```js
   var wstream = require('fs').createWriteStream('/path/to/destiny');
 
   image.pipe(wstream);
@@ -77,6 +77,6 @@ Use method chaining to apply many transformations to a single image. Get the ima
     .exec(function(err, imageBuffer) {
   	  if (err) return console.error(err);
 
-  	  fs.writeFile('/path/to/destiny', imageBuffer)<
+  	  fs.writeFile('/path/to/destiny', imageBuffer);
     });
 ```
