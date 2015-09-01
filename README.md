@@ -1,16 +1,15 @@
-# oenyim
-[![Build Status](https://travis-ci.org/codingpains/oenyim.svg?branch=master)](https://travis-ci.org/codingpains/oenyim)
+# Oenyi
 
 A wrapper for a few gm methods that just provides a convenient and consistent API.
 
 It is built to chain all transformations you need and execute them once you call the `exec` method, returning the modified image as a `Stream`.
 
-### Getting an oenyim image instance.
+### Getting an oenyi image instance.
 
 
 ```
-  var oenyim = require('oenyim');
-  var image = oenyim('/path/to/image');
+  var oenyi = require('oenyi');
+  var image = oenyi('/path/to/image');
 ```
 
 ### Convert image to jpeg.
@@ -68,10 +67,10 @@ Crops and resizes the image to fit the provided sizes and the aspect ratio given
 Use method chaining to apply many transformations to a single image. Get the image stream at the end and do with it whatever you want.
 
 ```
-  var oenyim = require('oenyim');
+  var oenyi = require('oenyi');
   var fs = require('fs);
 
-  oenyim('/path/to/image')
+  oenyi('/path/to/image')
     .toJPG()
     .compress(80)
     .resizeAndCrop(500,500)

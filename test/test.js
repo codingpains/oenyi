@@ -1,6 +1,6 @@
 var test = require('tape');
 var fs = require('fs');
-var oenyim = require('../index');
+var oenyi = require('../index');
 var path = require('path');
 var testImages = {
   sq: {
@@ -18,12 +18,12 @@ var testImages = {
 };
 
 
-test('should return oenyim instance', function(assert) {
+test('should return oenyi instance', function(assert) {
   assert.plan(1);
 
-  var image = oenyim('');
+  var image = oenyi('');
   var actual = image.constructor.name;
-  var expected = 'Oenyim';
+  var expected = 'Oenyi';
 
   assert.equal(actual, expected);
 });
@@ -31,7 +31,7 @@ test('should return oenyim instance', function(assert) {
 test('should chain', function(assert) {
   assert.plan(1);
 
-  var image = oenyim('');
+  var image = oenyi('');
   var expected = 2;
   var actual;
 
@@ -45,7 +45,7 @@ test('should chain', function(assert) {
 test('should execute queue in order', function(assert) {
   assert.plan(1);
 
-  var image = oenyim('');
+  var image = oenyi('');
 
   function f1(fn) {
     fn(null, {toBuffer: function(mime, cb) { return cb(null,1); }});
@@ -71,7 +71,7 @@ test('should execute queue in order', function(assert) {
 test('should empty queue after execution', function(assert) {
   assert.plan(1);
 
-  var image = oenyim('');
+  var image = oenyi('');
 
   function f1(fn) {
     fn(null, {toBuffer: function(mime, cb) { return cb(null,1); }});
@@ -89,7 +89,7 @@ test('should empty queue after execution', function(assert) {
 
 test('should return instance of error on failing exec', function(assert) {
   assert.plan(1);
-  var image = oenyim('');
+  var image = oenyi('');
   var error = new Error();
 
   function fail(fn) {
@@ -108,7 +108,7 @@ test('should return instance of error on failing exec', function(assert) {
 test('should apply just resize when method is contain', function(assert) {
   assert.plan(2);
   var resizeArgs = {width: 300, height: 400, method: 'contain'};
-  var image = oenyim('');
+  var image = oenyi('');
 
   image._size = {width: testImages.ls.size.width, height: testImages.ls.size.height};
 
@@ -132,7 +132,7 @@ test('should apply just resize when method is contain', function(assert) {
 test('should resize with correct values in contain method landscape to portrait', function(assert) {
   assert.plan(2);
   var resizeArgs = {width: 300, height: 400, method: 'contain'};
-  var image = oenyim('');
+  var image = oenyi('');
 
   image._size = {width: testImages.ls.size.width, height: testImages.ls.size.height};
 
@@ -153,7 +153,7 @@ test('should resize with correct values in contain method landscape to portrait'
 test('should resize with correct values in contain method landscape to square', function(assert) {
   assert.plan(2);
   var resizeArgs = {width: 200, height: 200, method: 'contain'};
-  var image = oenyim('');
+  var image = oenyi('');
 
   image._size = {width: testImages.ls.size.width, height: testImages.ls.size.height};
 
@@ -174,7 +174,7 @@ test('should resize with correct values in contain method landscape to square', 
 test('should resize with correct values in contain method landscape to larger ratio landscape', function(assert) {
   assert.plan(2);
   var resizeArgs = {width: 400, height: 200, method: 'contain'};
-  var image = oenyim('');
+  var image = oenyi('');
 
   image._size = {width: testImages.ls.size.width, height: testImages.ls.size.height};
 
@@ -195,7 +195,7 @@ test('should resize with correct values in contain method landscape to larger ra
 test('should resize with correct values in contain method landscape to smaller ratio landscape', function(assert) {
   assert.plan(2);
   var resizeArgs = {width: 300, height: 270, method: 'contain'};
-  var image =  oenyim('');
+  var image =  oenyi('');
 
   image._size = {width: testImages.ls.size.width, height: testImages.ls.size.height};
 
@@ -218,7 +218,7 @@ test('should resize with correct values in contain method landscape to smaller r
 test('should resize with correct values in contain method square to square', function(assert) {
   assert.plan(2);
   var resizeArgs = {width: 400, height: 400, method: 'contain'};
-  var image = oenyim('');
+  var image = oenyi('');
 
   image._size = {width: testImages.sq.size.width, height: testImages.sq.size.height};
 
@@ -239,7 +239,7 @@ test('should resize with correct values in contain method square to square', fun
 test('should resize with correct values in contain method square to portrait', function(assert) {
   assert.plan(2);
   var resizeArgs = {width: 200, height: 400, method: 'contain'};
-  var image = oenyim('');
+  var image = oenyi('');
 
   image._size = {width: testImages.sq.size.width, height: testImages.sq.size.height};
 
@@ -260,7 +260,7 @@ test('should resize with correct values in contain method square to portrait', f
 test('should resize with correct values in contain method square to landsape', function(assert) {
   assert.plan(2);
   var resizeArgs = {width: 400, height: 310, method: 'contain'};
-  var image = oenyim('');
+  var image = oenyi('');
 
   image._size = {width: testImages.sq.size.width, height: testImages.sq.size.height};
 
@@ -283,7 +283,7 @@ test('should resize with correct values in contain method square to landsape', f
 test('should resize with correct values in contain method portait to square', function(assert) {
   assert.plan(2);
   var resizeArgs = {width: 400, height: 400, method: 'contain'};
-  var image = oenyim('');
+  var image = oenyi('');
 
   image._size = {width: testImages.pt.size.width, height: testImages.pt.size.height};
 
@@ -304,7 +304,7 @@ test('should resize with correct values in contain method portait to square', fu
 test('should resize with correct values in contain method portait to portrait with smaller ratio', function(assert) {
   assert.plan(2);
   var resizeArgs = {width: 200, height: 800, method: 'contain'};
-  var image = oenyim('');
+  var image = oenyi('');
 
   image._size = {width: testImages.pt.size.width, height: testImages.pt.size.height};
 
@@ -325,7 +325,7 @@ test('should resize with correct values in contain method portait to portrait wi
 test('should resize with correct values in contain method portait to portrait with bigger ratio', function(assert) {
   assert.plan(2);
   var resizeArgs = {width: 700, height: 800, method: 'contain'};
-  var image = oenyim('');
+  var image = oenyi('');
 
   image._size = {width: testImages.pt.size.width, height: testImages.pt.size.height};
 
@@ -346,7 +346,7 @@ test('should resize with correct values in contain method portait to portrait wi
 test('should resize with correct values in contain method portait to portrait with same ratio', function(assert) {
   assert.plan(2);
   var resizeArgs = {width: 559, height: 800, method: 'contain'};
-  var image = oenyim('');
+  var image = oenyi('');
 
   image._size = {width: testImages.pt.size.width, height: testImages.pt.size.height};
 
@@ -367,7 +367,7 @@ test('should resize with correct values in contain method portait to portrait wi
 test('should resize with correct values in contain method portait to landscape', function(assert) {
   assert.plan(2);
   var resizeArgs = {width: 600, height: 380, method: 'contain'};
-  var image = oenyim('');
+  var image = oenyi('');
 
   image._size = {width: testImages.pt.size.width, height: testImages.pt.size.height};
 

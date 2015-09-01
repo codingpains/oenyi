@@ -1,5 +1,5 @@
-var Oenyim = require('./lib/oenyim');
+var Oenyi = require('./lib/oenyi');
 
 module.exports = function(fileName) {
-  return new Oenyim(fileName);
+  return new Oenyi(fileName);
 };

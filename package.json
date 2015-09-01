@@ -1,5 +1,5 @@
 {
-  "name": "oenyim",
+  "name": "oenyi",
   "description": "A wrapper for gm and other image processing commands that provides a chainable API with async pipeline of commands.",
   "version": "0.0.1",
   "keywords": [
@@ -14,10 +14,10 @@
   "scripts": {
     "test": "tape ./test/test.js"
   },
-  "homepage": "https://github.com/codingpains/oenyim",
+  "homepage": "https://github.com/codingpains/oenyi",
   "repository": {
     "type": "git",
-    "url": "git://github.com/codingpains/oenyim.git"
+    "url": "git://github.com/codingpains/oenyi.git"
   },
   "license": "MIT",
   "author": {
@@ -27,7 +27,7 @@
   },
   "main": "./index.js",
   "files": [
-    "lib/oenyim"
+    "lib/oenyi"
   ],
   "dependencies": {
     "async": "^1.4.2",
