@@ -120,8 +120,7 @@ test('should apply just resize when method is contain', function(assert) {
 
 //From landscape resizing
 
-test('should resize with correct values in contain method landscape to portrait', function(assert) {
-  assert.plan(2);
+test('resize by contain: should calculate correct values landscape to portrait', function(assert) {
   var resizeArgs = {width: 300, height: 400, method: 'contain'};
   var image = oenyi('');
 
@@ -131,18 +130,17 @@ test('should resize with correct values in contain method landscape to portrait'
     .exec(function(err, buffer, calc) {
       var expected = 300;
       var actual = calc.resize.width;
-
       assert.equal(actual, expected, 'resized with is correct');
 
       expected = 225;
       actual = calc.resize.height;
-
       assert.equal(actual, expected, 'resized height is correct');
+
+      assert.end();
     });
 });
 
-test('should resize with correct values in contain method landscape to square', function(assert) {
-  assert.plan(2);
+test('resize by contain: should calculate correct values landscape to square', function(assert) {
   var resizeArgs = {width: 200, height: 200, method: 'contain'};
   var image = oenyi('');
 
@@ -152,18 +150,17 @@ test('should resize with correct values in contain method landscape to square', 
     .exec(function(err, buffer, calc) {
       var expected = 200;
       var actual = calc.resize.width;
-
       assert.equal(actual, expected, 'resized with is correct');
 
       expected = 150;
       actual = calc.resize.height;
-
       assert.equal(actual, expected, 'resized height is correct');
+
+      assert.end();
     });
 });
 
-test('should resize with correct values in contain method landscape to larger ratio landscape', function(assert) {
-  assert.plan(2);
+test('resize by contain: should calculate correct values landscape to larger ratio landscape', function(assert) {
   var resizeArgs = {width: 400, height: 200, method: 'contain'};
   var image = oenyi('');
 
@@ -173,18 +170,17 @@ test('should resize with correct values in contain method landscape to larger ra
     .exec(function(err, buffer, calc) {
       var expected = 267;
       var actual = calc.resize.width;
-
       assert.equal(actual, expected, 'resized with is correct');
 
       expected = 200;
       actual = calc.resize.height;
-
       assert.equal(actual, expected, 'resized height is correct');
+
+      assert.end();
     });
 });
 
-test('should resize with correct values in contain method landscape to smaller ratio landscape', function(assert) {
-  assert.plan(2);
+test('resize by contain: should calculate correct values landscape to smaller ratio landscape', function(assert) {
   var resizeArgs = {width: 300, height: 270, method: 'contain'};
   var image =  oenyi('');
 
@@ -194,18 +190,17 @@ test('should resize with correct values in contain method landscape to smaller r
     .exec(function(err, buffer, calc) {
       var expected = 300;
       var actual = calc.resize.width;
-
       assert.equal(actual, expected, 'resized with is correct');
 
       expected = 225;
       actual = calc.resize.height;
-
       assert.equal(actual, expected, 'resized height is correct');
+
+      assert.end();
     });
 });
 
-test('should resize with correct values in contain method landscape to same ratio landscape', function(assert) {
-  assert.plan(2);
+test('resize by contain: should calculate correct values landscape to same ratio landscape', function(assert) {
   var resizeArgs = {width: 401, height: 300, method: 'contain'};
   var image =  oenyi('');
 
@@ -215,13 +210,49 @@ test('should resize with correct values in contain method landscape to same rati
     .exec(function(err, buffer, calc) {
       var expected = 401;
       var actual = calc.resize.width;
-
       assert.equal(actual, expected, 'resized with is correct');
 
       expected = 300;
       actual = calc.resize.height;
-
       assert.equal(actual, expected, 'resized height is correct');
+
+      assert.end();
+    });
+});
+
+test('resize by cover: should calculate correct values landscape to square', function(assert) {
+  var resizeArgs = {width: 100, height: 100, method: 'cover'};
+  var image = oenyi('');
+
+  image._size = {width: testImages.ls.size.width, height: testImages.ls.size.height};
+
+  image.resize(resizeArgs)
+    .exec(function(err, buffer, calc) {
+      var expected = 100;
+      var actual = calc.resize.width;
+      assert.equal(actual, expected, 'resized with is correct');
+
+      expected = 100;
+      actual = calc.resize.height;
+      assert.equal(actual, expected, 'resized height is correct');
+
+      expected = 194;
+      actual = calc.crop.width;
+      assert.equal(actual, expected, 'cropped width is correct');
+
+      expected = 194;
+      actual = calc.crop.height;
+      assert.equal(actual, expected, 'cropped height is correct');
+
+      expected = 33;
+      actual = calc.crop.x;
+      assert.equal(actual, expected, 'crop x is correct');
+
+      expected = 0;
+      actual = calc.crop.y;
+      assert.equal(actual, expected, 'crop y is correct');
+
+      assert.end();
     });
 });
 
