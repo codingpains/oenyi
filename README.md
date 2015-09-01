@@ -25,9 +25,7 @@ It is built to chain all transformations you need and execute them once you call
 
 
 ```
-  var quality = 90;
-
-  image.compress(quality);
+  image.compress({quality: 90});
 ```
 
 
@@ -51,7 +49,7 @@ Crops and resizes the image to fit the provided sizes and the aspect ratio given
 ### Execute all commands and return the Buffer with the modified image.
 
 ```
-	image.exec(function(err, imagebuf) {
+	image.exec(function(err, imageBuffer) {
 	  // Your code here.
 	});
 ```
@@ -66,7 +64,7 @@ Crops and resizes the image to fit the provided sizes and the aspect ratio given
 
 ### Run a complex chained transformation.
 
-Use method chaining to apply many transformations to a single image. Get the image stream at the end and do with it whatever you want.
+Use method chaining to apply many transformations to a single image. Get the image buffer at the end and do with it whatever you want.
 
 ```
   var oenyi = require('oenyi');
@@ -74,11 +72,11 @@ Use method chaining to apply many transformations to a single image. Get the ima
 
   oenyi('/path/to/image')
     .toJPG()
-    .compress(80)
-    .resizeAndCrop(500,500)
-    .exec(function(err, image) {
+    .compress({quality: 80})
+    .resize({width: 500, height: 500, method: 'cover'})
+    .exec(function(err, imageBuffer) {
   	  if (err) return console.error(err);
 
-  	  fs.writeFile('/path/to/destiny', image)
+  	  fs.writeFile('/path/to/destiny', imageBuffer)
     });
 ```
