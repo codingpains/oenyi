@@ -68,7 +68,7 @@ Use method chaining to apply many transformations to a single image. Get the ima
 
 ```js
   var oenyi = require('oenyi');
-  var fs = require('fs);
+  var fs = require('fs');
 
   oenyi('/path/to/image')
     .toJPG()
@@ -77,6 +77,6 @@ Use method chaining to apply many transformations to a single image. Get the ima
     .exec(function(err, imageBuffer) {
   	  if (err) return console.error(err);
 
-  	  fs.writeFile('/path/to/destiny', imageBuffer)
+  	  fs.writeFile('/path/to/destiny', imageBuffer)<
     });
 ```
