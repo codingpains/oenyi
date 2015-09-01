@@ -66,7 +66,7 @@ Crops and resizes the image to fit the provided sizes and the aspect ratio given
 
 Use method chaining to apply many transformations to a single image. Get the image buffer at the end and do with it whatever you want.
 
-```
+```js
   var oenyi = require('oenyi');
   var fs = require('fs);
 
