@@ -1,7 +1,7 @@
 {
   "name": "oenyi",
   "description": "A wrapper for gm and other image processing commands that provides a chainable API with async pipeline of commands.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "keywords": [
     "image",
     "images",
