@@ -26,9 +26,6 @@
     "url": "http://medium.com/@codingpains"
   },
   "main": "./index.js",
-  "files": [
-    "lib/oenyi.js"
-  ],
   "dependencies": {
     "async": "^1.4.2",
     "bluebird": "^2.9.34",
