@@ -27,7 +27,7 @@
   },
   "main": "./index.js",
   "files": [
-    "lib/oenyi"
+    "lib/oenyi.js"
   ],
   "dependencies": {
     "async": "^1.4.2",
