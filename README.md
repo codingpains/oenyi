@@ -42,23 +42,21 @@ Keeps aspect ratio and just scales up or down the image until it fits the provid
 Crops and resizes the image to fit the provided sizes and the aspect ratio given by such sizes.
 
 ```
-
   image.resize({width: 500, height: 500, method: 'cover'});
 ```
 
 ### Execute all commands and return the Buffer with the modified image.
 
 ```
-	image.exec(function(err, imageBuffer) {
-	  // Your code here.
-	});
+  image.exec(function(err, imageBuffer) {
+    // Your code here.
+  });
 ```
 
 ### Execute all commands and pipe to a WritableStream;
 
 ```
   var wstream = require('fs').createWriteStream('/path/to/destiny');
-
   image.pipe(wstream);
 ```
 
@@ -75,8 +73,8 @@ Use method chaining to apply many transformations to a single image. Get the ima
     .compress({quality: 80})
     .resize({width: 500, height: 500, method: 'cover'})
     .exec(function(err, imageBuffer) {
-  	  if (err) return console.error(err);
+      if (err) return console.error(err);
 
-  	  fs.writeFile('/path/to/destiny', imageBuffer)
+      fs.writeFile('/path/to/destiny', imageBuffer)
     });
 ```
