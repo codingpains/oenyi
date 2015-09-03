@@ -1,6 +1,6 @@
 {
   "name": "oenyi",
-  "description": "A wrapper for gm and other image processing commands that provides a chainable API with async pipeline of commands.",
+  "description": "A wrapper for image processing commands that provides a chainable API with asynchronous pipeline of commands.",
   "version": "0.0.6",
   "keywords": [
     "image",
@@ -27,7 +27,6 @@
   },
   "main": "./index.js",
   "dependencies": {
-    "async": "^1.4.2",
     "bluebird": "^2.9.34",
     "deepcopy": "^0.5.0",
     "gm": "^1.18.1",
