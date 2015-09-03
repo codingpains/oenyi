@@ -2,6 +2,7 @@ var test = require('tape');
 var fs = require('fs');
 var oenyi = require('../index');
 var path = require('path');
+var buffer = fs.readFileSync(__dirname + '/assets/ssj-sq.jpeg');
 var testImages = {
   sq: { size: {width: 225, height: 225} },
   ls: { size: {width: 259, height: 194} },
@@ -10,13 +11,149 @@ var testImages = {
 
 
 test('should return oenyi instance', function(assert) {
-  assert.plan(1);
-
   var image = oenyi('');
   var actual = image.constructor.name;
   var expected = 'Oenyi';
 
   assert.equal(actual, expected);
+  assert.end();
+});
+
+test('should recieve buffer', function(assert) {
+  var image = oenyi(buffer);
+  var actual = image.constructor.name;
+  var expected = 'Oenyi';
+
+  assert.equal(actual, expected);
+  assert.end();
+});
+
+test('should receive null', function(assert) {
+  var image = oenyi(null);
+  var actual = image.constructor.name;
+  var expected = 'Oenyi';
+
+  assert.equal(actual, expected);
+  assert.end();
+});
+
+test('should receive undefined', function(assert) {
+  var image = oenyi();
+  var actual = image.constructor.name;
+  var expected = 'Oenyi';
+
+  assert.equal(actual, expected);
+  assert.end();
+});
+
+test('should throw error if argument is a number', function(assert) {
+  var error;
+  var image;
+  var actual;
+  var expected;
+  try {
+    image = oenyi(2);
+  } catch(err) {
+    error = err;
+  }
+
+  actual = error ? error.constructor.name : 'nope';
+  expected = 'BadArgumentError';
+  assert.equal(actual, expected);
+
+  actual = !!image;
+  expected = false;
+  assert.equal(actual, expected);
+
+  assert.end();
+});
+
+test('should throw error if argument is true', function(assert) {
+  var error;
+  var image;
+  var actual;
+  var expected;
+  try {
+    image = oenyi(true);
+  } catch(err) {
+    error = err;
+  }
+
+  actual = error ? error.constructor.name : 'nope';
+  expected = 'BadArgumentError';
+  assert.equal(actual, expected);
+
+  actual = !!image;
+  expected = false;
+  assert.equal(actual, expected);
+
+  assert.end();
+});
+
+test('should throw error if argument is an object', function(assert) {
+  var error;
+  var image;
+  var actual;
+  var expected;
+  try {
+    image = oenyi({});
+  } catch(err) {
+    error = err;
+  }
+
+  actual = error ? error.constructor.name : 'nope';
+  expected = 'BadArgumentError';
+  assert.equal(actual, expected);
+
+  actual = !!image;
+  expected = false;
+  assert.equal(actual, expected);
+
+  assert.end();
+});
+
+test('should throw error if argument is an array', function(assert) {
+  var error;
+  var image;
+  var actual;
+  var expected;
+  try {
+    image = oenyi([]);
+  } catch(err) {
+    error = err;
+  }
+
+  actual = error ? error.constructor.name : 'nope';
+  expected = 'BadArgumentError';
+  assert.equal(actual, expected);
+
+  actual = !!image;
+  expected = false;
+  assert.equal(actual, expected);
+
+  assert.end();
+});
+
+test('should throw error if argument is a function', function(assert) {
+  var error;
+  var image;
+  var actual;
+  var expected;
+  try {
+    image = oenyi(function() {});
+  } catch(err) {
+    error = err;
+  }
+
+  actual = error ? error.constructor.name : 'nope';
+  expected = 'BadArgumentError';
+  assert.equal(actual, expected);
+
+  actual = !!image;
+  expected = false;
+  assert.equal(actual, expected);
+
+  assert.end();
 });
 
 test('should chain', function(assert) {
