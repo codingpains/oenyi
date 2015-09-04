@@ -9,7 +9,7 @@ A very simple wrapper for a few image processing methods that just provides:
 
 It is designed to chain the transformations you need and execute them in order once you call the `exec` method which gives you a buffer with the image or, if you prefer, when you call the `pipe` method which accepts a stream.
 
-Want to see the technical specification? [Go here](https://github.com/codingpains/oenyi/wiki/technical%20spec)
+Want to see the technical specification? [Go here](https://github.com/codingpains/oenyi/wiki/Oenyi%20Technical%20Spec)
 
 ### Installation
 
@@ -124,3 +124,13 @@ Use method chaining to apply many transformations to a single image. Get the ima
       fs.writeFile('/path/to/destiny', imageBuffer);
     });
 ```
+
+## FAQ
+
+### Why the silly name?
+Because of this creepy video. https://youtu.be/GzobV_qoIcQ
+You can blame [javierbyte](http://github.com/javierbyte) for that.
+
+### Why do this wrapper?
+At [VoxFeed](http://voxfeed.com) we wanted to remove image processing related logic from our platform, isolate it and
+provide a consistent API to make our image related code more bearable...err, readable. So we designed this wrapper.
