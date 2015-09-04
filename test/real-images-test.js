@@ -26,8 +26,8 @@ var testImages = {
 
 //From landscape resizing
 
-test('resize by contain: should calculate correct values landscape to portrait', function(assert) {
-  var resizeArgs = {width: 300, height: 400, method: 'contain'};
+test('resize by fit: should calculate correct values landscape to portrait', function(assert) {
+  var resizeArgs = {width: 300, height: 400, method: 'fit'};
   var image = oenyi(testImages.ls.filename);
 
   image.resize(resizeArgs)
@@ -48,8 +48,8 @@ test('resize by contain: should calculate correct values landscape to portrait',
     });
 });
 
-test('resize by contain (buffer): should calculate correct values landscape to portrait', function(assert) {
-  var resizeArgs = {width: 300, height: 400, method: 'contain'};
+test('resize by fit (buffer): should calculate correct values landscape to portrait', function(assert) {
+  var resizeArgs = {width: 300, height: 400, method: 'fit'};
   var image = oenyi(testImages.ls.buffer);
 
   image.resize(resizeArgs)
@@ -70,8 +70,8 @@ test('resize by contain (buffer): should calculate correct values landscape to p
     });
 });
 
-test('resize by contain: should calculate correct values landscape to square', function(assert) {
-  var resizeArgs = {width: 200, height: 200, method: 'contain'};
+test('resize by fit: should calculate correct values landscape to square', function(assert) {
+  var resizeArgs = {width: 200, height: 200, method: 'fit'};
   var image = oenyi(testImages.ls.filename);
 
   image.resize(resizeArgs)
@@ -92,8 +92,8 @@ test('resize by contain: should calculate correct values landscape to square', f
     });
 });
 
-test('resize by contain (buffer): should calculate correct values landscape to square', function(assert) {
-  var resizeArgs = {width: 200, height: 200, method: 'contain'};
+test('resize by fit (buffer): should calculate correct values landscape to square', function(assert) {
+  var resizeArgs = {width: 200, height: 200, method: 'fit'};
   var image = oenyi(testImages.ls.buffer);
 
   image.resize(resizeArgs)
@@ -114,8 +114,8 @@ test('resize by contain (buffer): should calculate correct values landscape to s
     });
 });
 
-test('resize by contain: should calculate correct values landscape to larger ratio landscape', function(assert) {
-  var resizeArgs = {width: 400, height: 200, method: 'contain'};
+test('resize by fit: should calculate correct values landscape to larger ratio landscape', function(assert) {
+  var resizeArgs = {width: 400, height: 200, method: 'fit'};
   var image = oenyi(testImages.ls.filename);
 
   image.resize(resizeArgs)
@@ -136,8 +136,8 @@ test('resize by contain: should calculate correct values landscape to larger rat
     });
 });
 
-test('resize by contain (buffer): should calculate correct values landscape to larger ratio landscape', function(assert) {
-  var resizeArgs = {width: 400, height: 200, method: 'contain'};
+test('resize by fit (buffer): should calculate correct values landscape to larger ratio landscape', function(assert) {
+  var resizeArgs = {width: 400, height: 200, method: 'fit'};
   var image = oenyi(testImages.ls.buffer);
 
   image.resize(resizeArgs)
@@ -158,8 +158,8 @@ test('resize by contain (buffer): should calculate correct values landscape to l
     });
 });
 
-test('resize by contain: should calculate correct values landscape to smaller ratio landscape', function(assert) {
-  var resizeArgs = {width: 300, height: 270, method: 'contain'};
+test('resize by fit: should calculate correct values landscape to smaller ratio landscape', function(assert) {
+  var resizeArgs = {width: 300, height: 270, method: 'fit'};
   var image = oenyi(testImages.ls.filename);
 
   image.resize(resizeArgs)
@@ -180,8 +180,8 @@ test('resize by contain: should calculate correct values landscape to smaller ra
     });
 });
 
-test('resize by contain (buffer): should calculate correct values landscape to smaller ratio landscape', function(assert) {
-  var resizeArgs = {width: 300, height: 270, method: 'contain'};
+test('resize by fit (buffer): should calculate correct values landscape to smaller ratio landscape', function(assert) {
+  var resizeArgs = {width: 300, height: 270, method: 'fit'};
   var image = oenyi(testImages.ls.buffer);
 
   image.resize(resizeArgs)
@@ -202,8 +202,8 @@ test('resize by contain (buffer): should calculate correct values landscape to s
     });
 });
 
-test('resize by contain: should calculate correct values landscape to same ratio landscape', function(assert) {
-  var resizeArgs = {width: 401, height: 300, method: 'contain'};
+test('resize by fit: should calculate correct values landscape to same ratio landscape', function(assert) {
+  var resizeArgs = {width: 401, height: 300, method: 'fit'};
   var image = oenyi(testImages.ls.filename);
 
   image.resize(resizeArgs)
@@ -224,8 +224,8 @@ test('resize by contain: should calculate correct values landscape to same ratio
     });
 });
 
-test('resize by contain (buffer): should calculate correct values landscape to same ratio landscape', function(assert) {
-  var resizeArgs = {width: 401, height: 300, method: 'contain'};
+test('resize by fit (buffer): should calculate correct values landscape to same ratio landscape', function(assert) {
+  var resizeArgs = {width: 401, height: 300, method: 'fit'};
   var image = oenyi(testImages.ls.buffer);
 
   image.resize(resizeArgs)
@@ -324,8 +324,8 @@ test('resize by cover (buffer): should calculate correct values landscape to squ
 
 //From square resizing
 
-test('resize by contain: should calculate correct values square to square', function(assert) {
-  var resizeArgs = {width: 400, height: 400, method: 'contain'};
+test('resize by fit: should calculate correct values square to square', function(assert) {
+  var resizeArgs = {width: 400, height: 400, method: 'fit'};
   var image = oenyi(testImages.sq.filename);
 
   image.resize(resizeArgs)
@@ -342,8 +342,8 @@ test('resize by contain: should calculate correct values square to square', func
     });
 });
 
-test('resize by contain (buffer): should calculate correct values square to square', function(assert) {
-  var resizeArgs = {width: 400, height: 400, method: 'contain'};
+test('resize by fit (buffer): should calculate correct values square to square', function(assert) {
+  var resizeArgs = {width: 400, height: 400, method: 'fit'};
   var image = oenyi(testImages.sq.buffer);
 
   image.resize(resizeArgs)
@@ -360,8 +360,8 @@ test('resize by contain (buffer): should calculate correct values square to squa
     });
 });
 
-test('resize by contain: should calculate correct values square to portrait', function(assert) {
-  var resizeArgs = {width: 200, height: 400, method: 'contain'};
+test('resize by fit: should calculate correct values square to portrait', function(assert) {
+  var resizeArgs = {width: 200, height: 400, method: 'fit'};
   var image = oenyi(testImages.sq.filename);
 
   image.resize(resizeArgs)
@@ -382,8 +382,8 @@ test('resize by contain: should calculate correct values square to portrait', fu
     });
 });
 
-test('resize by contain (buffer): should calculate correct values square to portrait', function(assert) {
-  var resizeArgs = {width: 200, height: 400, method: 'contain'};
+test('resize by fit (buffer): should calculate correct values square to portrait', function(assert) {
+  var resizeArgs = {width: 200, height: 400, method: 'fit'};
   var image = oenyi(testImages.sq.buffer);
 
   image.resize(resizeArgs)
@@ -404,8 +404,8 @@ test('resize by contain (buffer): should calculate correct values square to port
     });
 });
 
-test('resize by contain: should calculate correct values  square to landsape', function(assert) {
-  var resizeArgs = {width: 400, height: 310, method: 'contain'};
+test('resize by fit: should calculate correct values  square to landsape', function(assert) {
+  var resizeArgs = {width: 400, height: 310, method: 'fit'};
   var image = oenyi(testImages.sq.filename);
 
   image.resize(resizeArgs)
@@ -426,8 +426,8 @@ test('resize by contain: should calculate correct values  square to landsape', f
     });
 });
 
-test('resize by contain (buffer): should calculate correct values  square to landsape', function(assert) {
-  var resizeArgs = {width: 400, height: 310, method: 'contain'};
+test('resize by fit (buffer): should calculate correct values  square to landsape', function(assert) {
+  var resizeArgs = {width: 400, height: 310, method: 'fit'};
   var image = oenyi(testImages.sq.buffer);
 
   image.resize(resizeArgs)
@@ -498,8 +498,8 @@ test('resize by cover (buffer): should calculate correct values square to square
 
 // From portrait resizing
 
-test('should resize with correct values in contain method portait to square', function(assert) {
-  var resizeArgs = {width: 400, height: 400, method: 'contain'};
+test('should resize with correct values in fit method portait to square', function(assert) {
+  var resizeArgs = {width: 400, height: 400, method: 'fit'};
   var image = oenyi(testImages.pt.filename);
 
   image.resize(resizeArgs)
@@ -520,8 +520,8 @@ test('should resize with correct values in contain method portait to square', fu
     });
 });
 
-test('should resize with correct values in contain method portait to portrait with smaller ratio', function(assert) {
-  var resizeArgs = {width: 200, height: 800, method: 'contain'};
+test('should resize with correct values in fit method portait to portrait with smaller ratio', function(assert) {
+  var resizeArgs = {width: 200, height: 800, method: 'fit'};
   var image = oenyi(testImages.pt.filename);
 
   image.resize(resizeArgs)
