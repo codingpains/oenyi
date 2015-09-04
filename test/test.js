@@ -357,15 +357,16 @@ test('resize by fit: should calculate correct values landscape to same ratio lan
     });
 });
 
-test('resize by cover: should calculate correct values landscape to square', function(assert) {
-  var resizeArgs = {width: 100, height: 100, method: 'cover'};
-  var image = oenyi('');
+// Resize by Contain:
+test('resize by contain: should caclulate correct values landscape to smaller landscape', function(assert) {
+  var resizeArgs = {width: 500, height: 255, method: 'contain'};
+  var image =  oenyi('');
 
-  image._size = {width: testImages.ls.size.width, height: testImages.ls.size.height};
+  image._size = {width: 3000, height: 600};
 
   image.resize(resizeArgs)
     .exec(function(err, buffer, calc) {
-      var expected = 100;
+      var expected = 500;
       var actual = calc.resize.width;
       assert.equal(actual, expected, 'resized with is correct');
 
@@ -373,21 +374,45 @@ test('resize by cover: should calculate correct values landscape to square', fun
       actual = calc.resize.height;
       assert.equal(actual, expected, 'resized height is correct');
 
-      expected = 194;
-      actual = calc.crop.width;
-      assert.equal(actual, expected, 'cropped width is correct');
+      assert.end();
+    });
+});
 
-      expected = 194;
-      actual = calc.crop.height;
-      assert.equal(actual, expected, 'cropped height is correct');
+test('resize by contain: should caclulate correct values landscape to bigger landscape', function(assert) {
+  var resizeArgs = {width: 6000, height: 4500, method: 'contain'};
+  var image =  oenyi('');
 
-      expected = 33;
-      actual = calc.crop.x;
-      assert.equal(actual, expected, 'crop x is correct');
+  image._size = {width: 3000, height: 600};
 
-      expected = 0;
-      actual = calc.crop.y;
-      assert.equal(actual, expected, 'crop y is correct');
+  image.resize(resizeArgs)
+    .exec(function(err, buffer, calc) {
+      var expected = 3000;
+      var actual = calc.resize.width;
+      assert.equal(actual, expected, 'resized with is correct');
+
+      expected = 600;
+      actual = calc.resize.height;
+      assert.equal(actual, expected, 'resized height is correct');
+
+      assert.end();
+    });
+});
+
+test('resize by contain: should calculate correct values landscape to portait (example case)', function(assert) {
+  var resizeArgs = {width: 1000, height: 2000, method: 'contain'};
+  var image = oenyi('');
+
+  image._size = {width: 5000, height: 3000};
+
+  image.resize(resizeArgs)
+    .exec(function(err, buffer, calc) {
+      var expected = 1000;
+      var actual = calc.resize.width;
+      assert.equal(actual, expected, 'resized with is correct');
+
+      expected = 600;
+      actual = calc.resize.height;
+      assert.equal(actual, expected, 'resized height is correct');
 
       assert.end();
     });
@@ -784,6 +809,26 @@ test('should resize with correct values in fit method portait to portrait with s
       actual = calc.resize.height;
 
       assert.equal(actual, expected, 'resized height is correct');
+    });
+});
+
+test('should resize with correct values in fit method portait to square (example case)', function(assert) {
+  var resizeArgs = {width: 1024, height: 1024, method: 'fit'};
+  var image = oenyi('');
+
+  image._size = {width: 640, height: 2560};
+
+  image.resize(resizeArgs)
+    .exec(function(err, buffer, calc) {
+      var expected = 256;
+      var actual = calc.resize.width;
+      assert.equal(actual, expected, 'resized with is correct');
+
+      expected = 1024;
+      actual = calc.resize.height;
+      assert.equal(actual, expected, 'resized height is correct');
+
+      assert.end();
     });
 });
 

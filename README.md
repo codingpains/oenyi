@@ -2,20 +2,44 @@
 
 [![Build Status](https://travis-ci.org/codingpains/oenyi.svg?branch=master)](https://travis-ci.org/codingpains/oenyi)
 
-A wrapper for a few gm methods that just provides a convenient and consistent API.
+A very simple wrapper for a few image processing methods that just provides:
+ * A convenient and consistent API.
+ * Full in memory processing support to reduce i/o and increase speed.
+ * Three resizing methods that will make your life easier.
 
-It is built to chain all transformations you need and execute them once you call the `exec` method, returning the modified image as a `Stream`.
+It is designed to chain the transformations you need and execute them in order once you call the `exec` method which gives you a buffer with the image or, if you prefer, when you call the 'pipe' method which accepts a stream.
 
-### Getting an oenyi image instance.
+### Installation
 
+```
+  npm install oenyi
+```
+### Require oenyi
 
 ```js
   var oenyi = require('oenyi');
+```
+### Getting an oenyi image instance.
+
+#### Using a string as path.
+```js
   var image = oenyi('/path/to/image');
 ```
 
-### Convert image to jpeg.
+#### Using a buffer
+```js
+  var fs = require('fs');
 
+  fs.readFile('/path/to/image', function(err, buffer) {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    var image = oenyi(buffer);
+  });
+```
+
+### Convert image to jpeg.
 
 ```js
   image.toJPG();
@@ -23,29 +47,49 @@ It is built to chain all transformations you need and execute them once you call
 
 ### Compress image to a given quality.
 
-
 ```js
   image.compress({quality: 90});
 ```
 
+## Reszing Methods.
 
-### Resize image respecting the original aspect ratio.
+Oenyi gives you three resizing methods: Cover, Contain and Fit. They do what they promise.
 
-Keeps aspect ratio and just scales up or down the image until it fits the provided sizes.
+### Resize by Contain.
 
-```js
-  image.resize({width: 500, height: 255, method: 'contain'});
-```
-
-### Resize image to cover or match size and force aspect ratio with no distortion.
-
-Crops and resizes the image to fit the provided sizes and the aspect ratio given by such sizes.
+It is meant to be used when you want to ensure a maximum size but you want the aspect ratio untouched and if it fits, then the original size as well.
+This method will only resize down when the image to resize is bigger than the size provided.
 
 ```js
-  image.resize({width: 500, height: 500, method: 'cover'});
+  // original size w:400, h:400
+  image.resize({width: 500, height: 255, method: 'contain'}); // => produces size w:255, h:225
+
+  // original size w:3000, h:600
+  image.resize({width: 500, height: 255, method: 'contain'}); // => produces size w:500, h:100
 ```
 
-### Execute all commands and return the Buffer with the modified image.
+### Resize by Fit.
+
+So you want to grow or shrink an image to fit an area as best as it can, but want to keep the aspect ratio and the full image visible? Well, use this method.
+
+```js
+  // original size w:640, h:2560
+  image.resize({width: 1024, height: 1024, method: 'fit'}); // => produces size w:256, h:1024
+
+  // original size w:5000, h:3000
+  image.resize({width: 1000, height: 2000, method: 'fit'}); // => produces size w:1000, h:600
+```
+
+### Resize by Cover.
+
+Resizes an image to cover or match a size and force a new aspect ratio with no distortion.
+
+```js
+  // original size w:640, h:2560
+  image.resize({width: 500, height: 500, method: 'cover'}); // => produces size w:500, h:500
+```
+
+### Execute all commands and return a buffer with the modified image.
 
 ```js
   image.exec(function(err, imageBuffer) {
@@ -53,7 +97,7 @@ Crops and resizes the image to fit the provided sizes and the aspect ratio given
   });
 ```
 
-### Execute all commands and pipe to a WritableStream;
+### Execute all commands and pipe to a stream;
 
 ```js
   var wstream = require('fs').createWriteStream('/path/to/destiny');
