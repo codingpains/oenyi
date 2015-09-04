@@ -7,7 +7,9 @@ A very simple wrapper for a few image processing methods that just provides:
  * Full in memory processing support to reduce i/o and increase speed.
  * Three resizing methods that will make your life easier.
 
-It is designed to chain the transformations you need and execute them in order once you call the `exec` method which gives you a buffer with the image or, if you prefer, when you call the 'pipe' method which accepts a stream.
+It is designed to chain the transformations you need and execute them in order once you call the `exec` method which gives you a buffer with the image or, if you prefer, when you call the `pipe` method which accepts a stream.
+
+Want to see the technical specification? [Go here](https://github.com/codingpains/oenyi/wiki/technical%20spec)
 
 ### Installation
 
@@ -97,7 +99,7 @@ Resizes an image to cover or match a size and force a new aspect ratio with no d
   });
 ```
 
-### Execute all commands and pipe to a stream;
+### Execute all commands and pipe to a stream.
 
 ```js
   var wstream = require('fs').createWriteStream('/path/to/destiny');
