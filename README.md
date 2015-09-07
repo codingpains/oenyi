@@ -13,6 +13,19 @@ Want to see the technical specification? [Go here](https://github.com/codingpain
 
 ### Installation
 
+You need to install imagemagick since this library depends on it.
+
+**OSX**
+```bash
+  $ brew install imagemagick
+```
+
+**Ubuntu**
+```bash
+  $ sudo apt-get install imagemagick
+```
+
+Then install the module.
 ```
   npm install oenyi
 ```
