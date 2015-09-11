@@ -2,6 +2,6 @@ languages:
    Ruby: false
    JavaScript: true
    Python: false
-   PHP: dalse
+   PHP: false
 exclude_paths:
 - "test/*"
