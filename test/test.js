@@ -232,17 +232,21 @@ test('should return instance of error on failing exec', function(assert) {
   var image = oenyi('');
 
   function fail(fn) {
-    fn(new Error());
+    var error = new Error('This function failed!');
+    fn(error, null, null);
   };
 
   image._queue = [fail];
   image.exec(function(error, data) {
-    if (error) return assert.fail('unexpected error');
-    var expected = typeof error;
-    var actual = typeof err;
+    if (error) {
+      var expected = typeof error;
+      var actual = typeof error;
 
-    assert.equal(actual, expected, 'return error when exec failed');
-    assert.end();
+      assert.equal(actual, expected, 'return error when exec failed');
+      assert.end();
+    } else {
+      return assert.fail('expected error, got nothing');
+    }
   });
 });
 
