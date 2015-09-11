@@ -1,14 +1,27 @@
 var test = require('tape');
 var fs = require('fs');
 var oenyi = require('../index');
-var path = require('path');
 var buffer = fs.readFileSync(__dirname + '/assets/ssj-sq.jpeg');
 var testImages = {
-  sq: { size: {width: 225, height: 225} },
-  ls: { size: {width: 259, height: 194} },
-  pt: { size: {width: 188, height: 269} },
+  sq: {
+    size: {
+      width: 225,
+      height: 225
+    }
+  },
+  ls: {
+    size: {
+      width: 259,
+      height: 194
+    }
+  },
+  pt: {
+    size: {
+      width: 188,
+      height: 269
+    }
+  }
 };
-
 
 test('should return oenyi instance', function(assert) {
   var image = oenyi('');
@@ -171,77 +184,77 @@ test('should chain', function(assert) {
 });
 
 test('should execute queue in order', function(assert) {
-  assert.plan(1);
-
   var image = oenyi('');
 
   function f1(fn) {
-    fn(null, {toBuffer: function(mime, cb) { return cb(null,1); }});
+    fn(null, {toBuffer: function(mime, cb) { return cb(null, 1); }});
   };
 
   function f2(fn) {
-    fn(null, {toBuffer: function(mime, cb) { return cb(null,2) }});
+    fn(null, {toBuffer: function(mime, cb) { return cb(null, 2); }});
   };
 
   function f3(fn) {
-    fn(null, {toBuffer: function(mime, cb) { return cb(null,3); }});
+    fn(null, {toBuffer: function(mime, cb) { return cb(null, 3); }});
   };
 
   image._queue = [f1, f2, f3];
-  image.exec(function(err, data) {
+  image.exec(function(error, data) {
+    if (error) return assert.fail('unexpected error');
     var expected = 3;
     var actual = data;
 
     assert.equal(actual, expected, 'execution order');
+    assert.end();
   });
 });
 
 test('should empty queue after execution', function(assert) {
-  assert.plan(1);
-
   var image = oenyi('');
 
   function f1(fn) {
-    fn(null, {toBuffer: function(mime, cb) { return cb(null,1); }});
+    fn(null, {toBuffer: function(mime, cb) { return cb(null, 1); }});
   };
 
   image._queue = [f1];
 
-  image.exec(function(err, data) {
+  image.exec(function(error, data) {
+    if (error) return assert.fail('unexpected error');
     var expected = 0;
     var actual = image._queue.length;
 
     assert.equal(actual, expected, 'empty queue after execution');
+    assert.end();
   });
 });
 
 test('should return instance of error on failing exec', function(assert) {
-  assert.plan(1);
   var image = oenyi('');
-  var error = new Error();
 
   function fail(fn) {
-    fn(new Error);
+    fn(new Error());
   };
 
   image._queue = [fail];
-  image.exec(function(err, data) {
+  image.exec(function(error, data) {
+    if (error) return assert.fail('unexpected error');
     var expected = typeof error;
     var actual = typeof err;
 
     assert.equal(actual, expected, 'return error when exec failed');
+    assert.end();
   });
 });
 
 test('should apply just resize when method is fit', function(assert) {
-  assert.plan(2);
   var resizeArgs = {width: 300, height: 400, method: 'fit'};
   var image = oenyi('');
 
   image._size = {width: testImages.ls.size.width, height: testImages.ls.size.height};
 
   image.resize(resizeArgs)
-    .exec(function(err, buffer, calc) {
+    .exec(function(error, buffer, calc) {
+      if (error) return assert.fail('unexpected error');
       var keyNames = Object.keys(calc);
       var expected = 1;
       var actual = keyNames.length;
@@ -252,11 +265,11 @@ test('should apply just resize when method is fit', function(assert) {
       actual = keyNames[0];
 
       assert.equal(actual, expected, 'applied resize');
+      assert.end();
     });
 });
 
-//From landscape resizing
-
+// From landscape resizing
 test('resize by fit: should calculate correct values landscape to portrait', function(assert) {
   var resizeArgs = {width: 300, height: 400, method: 'fit'};
   var image = oenyi('');
@@ -264,7 +277,8 @@ test('resize by fit: should calculate correct values landscape to portrait', fun
   image._size = {width: testImages.ls.size.width, height: testImages.ls.size.height};
 
   image.resize(resizeArgs)
-    .exec(function(err, buffer, calc) {
+    .exec(function(error, buffer, calc) {
+      if (error) return assert.fail('unexpected error');
       var expected = 300;
       var actual = calc.resize.width;
       assert.equal(actual, expected, 'resized with is correct');
@@ -284,7 +298,8 @@ test('resize by fit: should calculate correct values landscape to square', funct
   image._size = {width: testImages.ls.size.width, height: testImages.ls.size.height};
 
   image.resize(resizeArgs)
-    .exec(function(err, buffer, calc) {
+    .exec(function(error, buffer, calc) {
+      if(error) return assert.fail('unexpected error');
       var expected = 200;
       var actual = calc.resize.width;
       assert.equal(actual, expected, 'resized with is correct');
