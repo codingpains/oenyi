@@ -1,5 +1,6 @@
 var test = require('tape');
 var fs = require('fs');
+var WriteStream = require('memory-streams').WritableStream;
 var oenyi = require('../index');
 var path = require('path');
 var testImages = {
@@ -679,6 +680,33 @@ test('to jpeg (buffer): should return to jpeg format, scene and coalesce', funct
       assert.ok(buffer, 'should return buffer');
       assert.ok(buffer.length, 'buffer should not be empty');
       assert.notOk(err, 'should not throw');
+
+      var expected = 'jpg';
+      var actual = calc.convert.toFormat;
+      assert.equal(actual, expected);
+
+      expected = 'gif';
+      actual = calc.convert.fromFormat;
+      assert.equal(actual, expected);
+
+      expected = 0;
+      actual = calc.convert.scene;
+      assert.equal(actual, expected);
+
+      expected = true;
+      actual = calc.convert.coalesce;
+      assert.end();
+    });
+});
+
+test('to jpeg (pipe): should return to jpeg format, scene and coalesce', function(assert) {
+  var image = oenyi(testImages.gif.buffer);
+  var wstream = new WriteStream();
+
+  image.toJPG()
+    .pipe(wstream, function(error, calc) {
+      assert.ok(calc, 'should return calc');
+      assert.notOk(error, 'should not throw');
 
       var expected = 'jpg';
       var actual = calc.convert.toFormat;
