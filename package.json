@@ -1,7 +1,7 @@
 {
   "name": "oenyi",
   "description": "A wrapper for image processing commands that provides a chainable API with asynchronous pipeline of commands.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "keywords": [
     "image",
     "images",
