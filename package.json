@@ -1,7 +1,7 @@
 {
   "name": "oenyi",
   "description": "A wrapper for image processing commands that provides a chainable API with asynchronous pipeline of commands.",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "keywords": [
     "image",
     "images",
@@ -12,7 +12,9 @@
     "compress"
   ],
   "scripts": {
-    "test": "tape ./test/test.js"
+    "test": "tape ./test/test.js",
+    "coverage": "istanbul cover tape -- test/test.js",
+    "report-coverage": "CODECLIMATE_REPO_TOKEN=1b220a500b72de50db07c635aa57430fca27354fa445e6ffec291be27e9e1f63 codeclimate-test-reporter < coverage/lcov.info"
   },
   "homepage": "https://github.com/codingpains/oenyi",
   "repository": {
@@ -27,12 +29,14 @@
   },
   "main": "./index.js",
   "dependencies": {
-    "bluebird": "^2.9.34",
     "deepcopy": "^0.5.0",
     "gm": "^1.18.1",
-    "nimble": "0.0.2"
+    "nimble": "0.0.2",
+    "crispy-stream": "^0.1.1"
   },
   "devDependencies": {
+    "istanbul": "^0.3.20",
+    "jshint": "^2.8.0",
     "tape": "^4.2.0"
   }
 }
