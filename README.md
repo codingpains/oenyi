@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/codingpains/oenyi.svg?branch=master)](https://travis-ci.org/codingpains/oenyi)
 [![Code Climate](https://codeclimate.com/github/codingpains/oenyi/badges/gpa.svg)](https://codeclimate.com/github/codingpains/oenyi)
+[![Test Coverage](https://codeclimate.com/github/codingpains/oenyi/badges/coverage.svg)](https://codeclimate.com/github/codingpains/oenyi/coverage)
 [![NPM](https://nodei.co/npm/oenyi.png?mini=true)](https://npmjs.org/package/oenyi)
 
 A very simple wrapper for a few image processing methods that just provides:
