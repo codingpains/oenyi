@@ -13,8 +13,7 @@
   ],
   "scripts": {
     "test": "tape ./test/test.js",
-    "coverage": "istanbul cover tape -- test/test.js",
-    "report-coverage": "CODECLIMATE_REPO_TOKEN=1b220a500b72de50db07c635aa57430fca27354fa445e6ffec291be27e9e1f63 codeclimate-test-reporter < coverage/lcov.info"
+    "coverage": "istanbul cover tape -- test/test.js"
   },
   "homepage": "https://github.com/codingpains/oenyi",
   "repository": {
